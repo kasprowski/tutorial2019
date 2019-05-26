@@ -1,0 +1,8 @@
+scikit-learn
+tensorflow
+numpy
+opencv-contrib-python
+pygame
+thorpy
+matplotlib
+pandas
