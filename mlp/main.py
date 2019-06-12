@@ -4,9 +4,7 @@ Application classifying datasetA_3c
 @author: pawel@kasprowski.pl
 '''
 import pandas
-from sklearn.metrics import classification_report
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics.classification import accuracy_score
+from sklearn.metrics.classification import classification_report, confusion_matrix, accuracy_score, cohen_kappa_score
 from sklearn.preprocessing.label import LabelBinarizer
 
 import matplotlib.pyplot as plt
@@ -72,11 +70,9 @@ def main():
     model.add(Dense(250, activation='sigmoid'))
     model.add(Dense(classesNum, activation='softmax'))
 
-    ## loss function depends on the number of classes!
-    loss='categorical_crossentropy'    
-    model.compile(loss=loss, optimizer="adam",metrics=['accuracy'])
+    model.compile(loss='categorical_crossentropy', optimizer="adam",metrics=['accuracy'])
 
-    EPOCHS=100
+    EPOCHS=50
     BATCH=50
     H = model.fit(trainSamples, trainLabels, batch_size=BATCH, epochs=EPOCHS
               #,class_weight=d_class_weights
@@ -88,8 +84,8 @@ def main():
 
     print(confusion_matrix(testLabels.argmax(axis=1), mlpResults.argmax(axis=1)))
     print(classification_report(testLabels.argmax(axis=1), mlpResults.argmax(axis=1),target_names=lb.classes_))
-    mlpAcc = accuracy_score(testLabels.argmax(axis=1), mlpResults.argmax(axis=1)) 
-    print("MLP Accuracy: {:.2f}".format(mlpAcc))
+    print("MLP Accuracy: {:.2f}".format(accuracy_score(testLabels.argmax(axis=1), mlpResults.argmax(axis=1))))
+    print("Cohen's Kappa {:.2f}".format(cohen_kappa_score(testLabels.argmax(axis=1), mlpResults.argmax(axis=1))))
 
 
     N = np.arange(0, EPOCHS)
@@ -113,8 +109,8 @@ def main():
 #    treeResults = treemodel.predict(testSamples)    
 #    print(confusion_matrix(testLabels.argmax(axis=1), treeResults.argmax(axis=1)))
 #    print(classification_report(testLabels.argmax(axis=1), treeResults.argmax(axis=1)))
-#    treeAcc = accuracy_score(testLabels.argmax(axis=1), treeResults.argmax(axis=1)) 
-#    print("Tree Accuracy: {:.2f}".format(treeAcc))
+#    print("Tree Accuracy: {:.2f}".format(accuracy_score(testLabels.argmax(axis=1), treeResults.argmax(axis=1))))
+#    print("Cohen's Kappa {:.2f}".format(cohen_kappa_score(testLabels.argmax(axis=1), treeResults.argmax(axis=1))))
 
 
 

@@ -35,7 +35,7 @@ def classification(model_name,samples,labels,rangex,rangey):
     
     # train the model
     model.fit(samples, labels)    
-    print("classifier - created")    
+    print("classifier ",model," - created")    
     
     # build the matrix of results using the model   
     result = np.zeros([rangex,rangey])

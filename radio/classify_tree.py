@@ -8,7 +8,7 @@ import numpy as np
 import loader
 
 from keras_preprocessing.sequence import pad_sequences
-from sklearn.metrics import classification_report,confusion_matrix,accuracy_score
+from sklearn.metrics import classification_report,confusion_matrix,accuracy_score, cohen_kappa_score
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing.label import LabelBinarizer
 from sklearn.tree import DecisionTreeClassifier
@@ -39,7 +39,8 @@ def main():
     print(classification_report(testLabels.argmax(axis=1), treeResults.argmax(axis=1)))
     treeAcc = accuracy_score(testLabels.argmax(axis=1), treeResults.argmax(axis=1)) 
     print("Accuracy Tree: {:.2f}".format(treeAcc))
-
+    print("Cohen's Kappa {:.2f}".format(cohen_kappa_score(testLabels.argmax(axis=1), treeResults.argmax(axis=1))))
+    input("")
 
 if __name__ == "__main__":
     main()

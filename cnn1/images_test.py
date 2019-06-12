@@ -16,7 +16,6 @@ from models import cnn_network, flat_network, tree
 
 
 def printResults(testLabels,testResults):
-    
     print(confusion_matrix(testLabels.argmax(axis=1), testResults.argmax(axis=1)))
     print(classification_report(testLabels.argmax(axis=1), testResults.argmax(axis=1)))
     print("Cohen's Kappa: {}".format(cohen_kappa_score(testLabels.argmax(axis=1), testResults.argmax(axis=1))))

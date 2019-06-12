@@ -1,5 +1,5 @@
 '''
-Prepares images from eye trcking data files
+Prepares images from eye tracking data files
 
 @author: pawel@kasprowski.pl
 '''

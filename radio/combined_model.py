@@ -5,7 +5,7 @@ Uses data from images and from a flat csv file to classify samples
 '''
 import loader
 
-from sklearn.metrics.classification import classification_report, accuracy_score
+from sklearn.metrics.classification import classification_report, accuracy_score, cohen_kappa_score
 from sklearn.metrics import confusion_matrix
 
 from sklearn.preprocessing.label import LabelBinarizer
@@ -76,13 +76,14 @@ print(model.summary())
 
 model.compile(loss='categorical_crossentropy', optimizer="adam",metrics=['accuracy'])
 
-EPOCHS = 20
+EPOCHS = 10
 BATCH=100
-model.fit([samplesIMG,samplesCSV], labels, batch_size=BATCH, epochs=EPOCHS,validation_split=0.25)
+model.fit([samplesIMG,samplesCSV], labels, batch_size=BATCH, epochs=EPOCHS)
 
 results = model.predict([samplesIMG,samplesCSV])
 
 print(confusion_matrix(labels.argmax(axis=1), results.argmax(axis=1)))
 print(classification_report(labels.argmax(axis=1), results.argmax(axis=1)))
-print("Accuracy: {}".format(accuracy_score(labels.argmax(axis=1), results.argmax(axis=1))))
-
+print("Accuracy: {:.2f}".format(accuracy_score(labels.argmax(axis=1), results.argmax(axis=1))))
+print("Cohen's Kappa {:.2f}".format(cohen_kappa_score(labels.argmax(axis=1), results.argmax(axis=1))))
+input("")

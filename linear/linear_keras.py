@@ -27,7 +27,7 @@ model.add(dense)
 model.compile(loss="mean_squared_error", optimizer="adam", metrics=["mae","mse"])
 
 #fit model
-model.fit(X,Y,epochs=1000)
+model.fit(X,Y,epochs=500)
 
 #check errors
 Y_pred = model.predict(X)[:,0]

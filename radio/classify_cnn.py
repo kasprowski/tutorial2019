@@ -9,7 +9,7 @@ import numpy as np
 import loader
 
 from sklearn.metrics import classification_report,confusion_matrix
-from sklearn.metrics.classification import accuracy_score
+from sklearn.metrics.classification import accuracy_score, cohen_kappa_score
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing.label import LabelBinarizer
 from sklearn.utils import class_weight
@@ -108,7 +108,8 @@ def main():
     print(classification_report(testLabels.argmax(axis=1), cnnResults.argmax(axis=1)))
     cnnAcc = accuracy_score(testLabels.argmax(axis=1), cnnResults.argmax(axis=1))
     print("Accuracy CNN: {:.2f}".format(cnnAcc))
-
+    print("Cohen's Kappa {:.2f}".format(cohen_kappa_score(testLabels.argmax(axis=1), cnnResults.argmax(axis=1))))
+    input("")
 
 if __name__ == "__main__":
     main()
