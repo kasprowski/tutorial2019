@@ -1,5 +1,9 @@
 '''
-Uses data from images and from a flat csv file to classify samples
+Deep Learning in the Eye Tracking World tutorial source file
+https://www.github.com/kasprowski/tutorial2019
+
+Uses data from both images and a flat csv file to classify samples
+Loads data using loader.py
 
 @author: pawel@ksasprowski.pl
 '''
@@ -67,10 +71,10 @@ flatmodel.add(Dense(50, activation='sigmoid'))
 
 # concatenated model
 combined = concatenate([cnnmodel.output, flatmodel.output])
-x = Dense(16, activation="sigmoid")(combined)
-x = Dense(numClasses, activation="sigmoid")(x)
+combined = Dense(16, activation="sigmoid")(combined)
+combined = Dense(numClasses, activation="sigmoid")(combined)
 
-model = Model(inputs=[cnnmodel.input, flatmodel.input], outputs=x)
+model = Model(inputs=[cnnmodel.input, flatmodel.input], outputs=combined)
 
 print(model.summary())
 

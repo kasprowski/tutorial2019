@@ -1,4 +1,7 @@
 '''
+Deep Learning in the Eye Tracking World tutorial source file
+https://www.github.com/kasprowski/tutorial2019
+
 Example of linear regression with gradient descent using Keras library.
 The "network" consists of one perceptron with one input, bias and one output
 
@@ -20,19 +23,19 @@ plt.scatter(X, Y, label="Points")
 X = np.array(X)
 Y = np.array(Y)
 
-#build model
+# build model
 model = Sequential()
 dense = Dense(1,input_shape=(1,))
 model.add(dense)
 model.compile(loss="mean_squared_error", optimizer="adam", metrics=["mae","mse"])
 
-#fit model
+# fit model
 model.fit(X,Y,epochs=500)
 
-#check errors
+# check errors
 Y_pred = model.predict(X)[:,0]
 E_pred = ((Y-Y_pred)**2).mean()
-#read weights from the network 
+# read weights from the network 
 pa, pb = model.get_weights()
 pa = pa[0,0]
 pb = pb[0]

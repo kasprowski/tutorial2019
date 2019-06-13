@@ -1,6 +1,9 @@
 '''
-Checks the model saved by 'animals_rnn.py'
+Deep Learning in the Eye Tracking World tutorial source file
+https://www.github.com/kasprowski/tutorial2019
 
+Checks the model saved by 'animals_rnn.py'
+Saves genuine (*_real.jpg) and generated (*_gen.jpg) scanpaths in /scanpaths folder
 
 @author: pawel@kasprowski.pl
 '''

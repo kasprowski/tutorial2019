@@ -1,9 +1,11 @@
 '''
-Converts arabic and roman numbers to each other
- 
-https://gist.github.com/riverrun/ac91218bb1678b857c12
+Deep Learning in the Eye Tracking World tutorial source file
+https://www.github.com/kasprowski/tutorial2019
 
-@author: riverrun
+Class that converts arabic and roman numbers to each other
+
+taken from: 
+https://gist.github.com/riverrun/ac91218bb1678b857c12
 '''
 
 class ToRoman(int):
@@ -55,17 +57,3 @@ def convert(number):
         return num.roman
     num = ToArabic(number)
     return num.arabic
-
-# class TestRomanConversion(unittest.TestCase):
-#     def setUp(self):
-#         self.numbers = [(1, 'I'), (3, 'III'), (4, 'IV'), (27, 'XXVII'), (44, 'XLIV'),
-#                 (93, 'XCIII'), (141, 'CXLI'), (402, 'CDII'), (575, 'DLXXV'),
-#                 (1024, 'MXXIV'), (3000, 'MMM')]
-# 
-#     def test_to_roman(self):
-#         for num in self.numbers:
-#             self.assertEqual(num[0], convert(num[1]))
-# 
-#     def test_to_arabic(self):
-#         for num in self.numbers:
-#             self.assertEqual(num[1], convert(num[0]))

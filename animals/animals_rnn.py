@@ -1,7 +1,12 @@
 '''
-RNN network trained to predict next gaze based on the previous 20
+Deep Learning in the Eye Tracking World tutorial source file
+https://www.github.com/kasprowski/tutorial2019
 
-@author: pawel@ksprowski.pl
+Creates RNN network trained to predict the next gaze based on the previous 20 gazes
+Saves an image with predictions after each epoch in /img folder
+Saves the final model in "model_rnn.h5" file
+
+@author: pawel@kasprowski.pl
 '''
 
 import os
@@ -21,7 +26,7 @@ def load_files(indir):
     samples = np.array(samples)
     return samples
 
-# Turns one sample of length N into N-sequence_dim samples of length sequence_dim
+# Turns one sample of length N into (N-sequence_dim) samples of length sequence_dim
 # (only if sequence_lag==1!)
 def make_sequences(samples, sequence_dim = 20, sequence_lag = 1):
     nsamples = []
@@ -75,6 +80,8 @@ def main():
                   , batch_size=128, verbose=1)
         
         predictions = model.predict(testSamples)
+        
+        # create and save image with all current predictions
         image = cv2.imread("img/{}.jpg".format(imname))
         cv2.line(image,(0,0),(200,200),(255,255,255),2)
         for p in predictions:    

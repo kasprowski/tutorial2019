@@ -1,4 +1,7 @@
 '''
+Deep Learning in the Eye Tracking World tutorial source file
+https://www.github.com/kasprowski/tutorial2019
+
 The application uses pygame and ThorPy to build the interface
 Then executes classification(model_name,samples,labels,RANGEX,RANGEY) from classify.py module
 
@@ -50,9 +53,6 @@ def refresh(screen):
         draw.rect(screen, GREEN, Rect(p[0],p[1],SIZEX,SIZEY), 0)
     draw.rect(screen, color, Rect(RANGEX*SIZEX+25,RANGEY*SIZEY-125,100,100), 0)    
 
-
-
-
 #########################################################################33
 
 def run_classification(model_name):
@@ -74,14 +74,12 @@ def reset():
     red_points = []
     green_points = []
         
-    
-
 def main():
     global reset
     pygame.init()
     screen = display.set_mode((WIDTH,HEIGHT),0,32)
     
-    # declaration buttons
+    # declaration of buttons
     runPerc = thorpy.make_button("Perceptron", func=lambda:run_classification("PERCEPTRON"))
     runHidden = thorpy.make_button("Hidden Layer", func=lambda:run_classification("HIDDEN"))
     runHiddenRelu = thorpy.make_button("Hidden RELU", func=lambda:run_classification("HIDDEN_RELU"))
@@ -94,7 +92,7 @@ def main():
     box.blit()
     box.update()
     
-    display.set_caption("Neural classifier byPK")
+    display.set_caption("Neural classifiers tester byPK")
     while True:
         clock.tick(40)
         for event in pygame.event.get():

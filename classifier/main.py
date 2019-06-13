@@ -1,4 +1,7 @@
 '''
+Deep Learning in the Eye Tracking World tutorial source file
+https://www.github.com/kasprowski/tutorial2019
+
 The application uses pygame and ThorPy to build the interface
 Then executes classification(model_name,samples,labels,RANGEX,RANGEY) from classify.py module
 
@@ -29,7 +32,6 @@ result = np.zeros([RANGEX,RANGEY]) # table of results
 # changes the current color
 def switch_color():
     global color
-    print("switch ")
     if color==RED:
         color=GREEN
     else:
@@ -48,7 +50,6 @@ def refresh(screen):
         draw.rect(screen, GREEN, Rect(p[0],p[1],SIZEX,SIZEY), 0)
     draw.rect(screen, color, Rect(RANGEX*SIZEX+25,RANGEY*SIZEY-125,100,100), 0)    
     
-
 # classifies all points in results matrix using given samples and the classification algorithm
 def run_classification(model_name):
     global result
@@ -92,7 +93,7 @@ def main():
     box.blit()
     box.update()
         
-    display.set_caption("Simple classifier byPK")
+    display.set_caption("Classification algorithms tester byPK")
     
     while True:
         clock.tick(40)
@@ -108,7 +109,7 @@ def main():
                         red_points.append(pos)
                     if color==GREEN:
                         green_points.append(pos)
-                if pos[0]>600 and pos[1]>450:
+                if pos[0]>600 and pos[1]>450: #click on switch area
                     switch_color()
             refresh(screen) 
         display.update()

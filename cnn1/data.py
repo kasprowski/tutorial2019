@@ -1,8 +1,24 @@
 '''
-Created on 20.05.2019
+Deep Learning in the Eye Tracking World tutorial source file
+https://www.github.com/kasprowski/tutorial2019
 
-@author: win
+Prepares artificial data for classification
+
+prepare_samples_areas():
+- vertical dashes in top-left area for label=0
+- vertical dashes in bottom-right area for label=1
+
+prepare_samples_colors():
+- white dashes for label=1
+- grey dashes for label=0
+
+prepare_samples_direction():
+- horizontal dashes for label=1
+- vertical dashes for label=0
+
+@author: pawel@kasprowski.pl
 '''
+
 import numpy as np
 import random
 import cv2
@@ -23,7 +39,7 @@ def prepare_samples_areas():
     #images with horizontal lines
     for i in range(size):
         sample = np.zeros((length,length))
-        for j in range(dashes):
+        for _ in range(dashes):
             x = random.randrange(0,length/2)
             y = random.randrange(0,length/2)
             sample[x:x+6,y:y+1]=255
@@ -34,7 +50,7 @@ def prepare_samples_areas():
     #images with vertical lines
     for i in range(size):
         sample = np.zeros((length,length))
-        for j in range(dashes):
+        for _ in range(dashes):
             x = random.randrange(length/2,length)
             y = random.randrange(length/2,length)
             sample[x:x+6,y:y+1]=255
@@ -59,7 +75,7 @@ def prepare_samples_colors():
     #images with horizontal lines
     for i in range(size):
         sample = np.zeros((length,length))
-        for j in range(dashes):
+        for _ in range(dashes):
             x = random.randrange(0,length)
             y = random.randrange(0,length)
             sample[x:x+6,y:y+1]=255
@@ -70,7 +86,7 @@ def prepare_samples_colors():
     #images with vertical lines
     for i in range(size):
         sample = np.zeros((length,length))
-        for j in range(dashes):
+        for _ in range(dashes):
             x = random.randrange(0,length)
             y = random.randrange(0,length)
             sample[x:x+6,y:y+1]=155
@@ -96,7 +112,7 @@ def prepare_samples_direction():
     #images with horizontal lines
     for i in range(size):
         sample = np.zeros((length,length))
-        for j in range(dashes):
+        for _ in range(dashes):
             x = random.randrange(0,length)
             y = random.randrange(0,length)
             sample[x:x+6,y:y+1]=255
@@ -107,7 +123,7 @@ def prepare_samples_direction():
     #images with vertical lines
     for i in range(size):
         sample = np.zeros((length,length))
-        for j in range(100):
+        for _ in range(dashes):
             x = random.randrange(0,length)
             y = random.randrange(0,length)
             sample[x:x+1,y:y+6]=255

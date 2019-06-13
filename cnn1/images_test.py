@@ -1,6 +1,10 @@
 '''
-Test of classification models using two types of generated images
+Deep Learning in the Eye Tracking World tutorial source file
+https://www.github.com/kasprowski/tutorial2019
 
+Test of classification models using two types of generated images
+Uses: data.py to prepare data, models.py to retrieve models
+ 
 @author: pawel@kasprowski.pl
 '''
 

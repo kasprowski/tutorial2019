@@ -1,9 +1,14 @@
 '''
-Module using sklearn package to classify samples
+Deep Learning in the Eye Tracking World tutorial source file
+https://www.github.com/kasprowski/tutorial2019
+
+Module using models loaded from models.py to classify samples
+Uses pyplot to show loss and metrics in subsequent training epochs
+
 @author: pawel@kasprowski.pl
 '''
 
-import cl_models
+import models
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -13,18 +18,21 @@ def classification(model_name,samples,labels,rangex,rangey):
 
     #available models from cl_models.py    
     nnmodels = {
-        "PERCEPTRON": cl_models.perceptron(),
-        "HIDDEN": cl_models.hidden_linear(),
-        "HIDDEN_RELU": cl_models.hidden_sigmoid()
+        "PERCEPTRON": models.perceptron(),
+        "HIDDEN": models.hidden_linear(),
+        "HIDDEN_RELU": models.hidden_sigmoid()
     }
     model = nnmodels.get(model_name)
+    
     model.compile(loss='binary_crossentropy', optimizer="adam",metrics=['accuracy'])
     
     # fit model
     EPOCHS = 100
     H = model.fit(samples, labels, epochs=EPOCHS,batch_size=10)    
 
-    print("classifier - done")    
+    print("classifier ",model," - created")
+
+    # classify each cell in area
     result = np.zeros([rangex,rangey])
     for x in range(rangex):
         for y in range(rangey):

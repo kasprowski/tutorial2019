@@ -1,17 +1,16 @@
 '''
-Inspired by:
-https://github.com/keras-team/keras/blob/master/examples/addition_rnn.py
+Deep Learning in the Eye Tracking World tutorial source file
+https://www.github.com/kasprowski/tutorial2019
 
-The RNN (LSTM) is trained to translate Roman numbers to arabic, e.g.
+The RNN (LSTM) is trained to translate Roman numbers to Arabic, e.g.
 IN: MDCCXXXI, OUT: 1731
 IN: DCXLIX, OUT: 649
 etc.
 
 @author: pawel@kasprowski.pl
-
+inspired by: https://github.com/keras-team/keras/blob/master/examples/addition_rnn.py
 '''
 import random
-from sklearn.metrics.classification import classification_report
 from tensorflow.python.keras import layers
 from tensorflow.python.keras.models import Sequential
 import roman_numerals as cnv
@@ -19,7 +18,7 @@ import numpy as np
 
 '''
 ########################################################################################
-Data generation = TRAINING_SIZE samples with 
+Data generation = DATASET_SIZE samples with 
 INPUT length input sequences
 and
 OUTPUT length output sequences
@@ -29,7 +28,7 @@ OUTPUT length output sequences
 from encoder import CharacterTable 
 
 # Parameters for the model and dataset.
-TRAINING_SIZE = 500
+DATASET_SIZE = 1000
 INPUT = 14
 OUTPUT = 4
 # object to encode roman numbers to one-hot 
@@ -46,7 +45,7 @@ used = []
 repetitions = 0
 generated = 0
 print('Generating data...')
-while len(seq_samples) < TRAINING_SIZE:
+while len(seq_samples) < DATASET_SIZE:
     number = random.randint(1,2000)
     # skip if already in the dataset
     if number in used: continue
@@ -65,15 +64,15 @@ print('Total roman numbers:', len(seq_samples))
 
 # one-hot encoding of all romans and arabic numbers
 print('Vectorization...')
-x = np.zeros((TRAINING_SIZE, INPUT, len(romans)), dtype=np.bool)
-y = np.zeros((TRAINING_SIZE, OUTPUT, len(chars)), dtype=np.bool)
+x = np.zeros((DATASET_SIZE, INPUT, len(romans)), dtype=np.bool)
+y = np.zeros((DATASET_SIZE, OUTPUT, len(chars)), dtype=np.bool)
 for i, sentence in enumerate(seq_samples):
     x[i] = rtable.encode(sentence, INPUT)
 for i, sentence in enumerate(seq_labels):
     y[i] = dtable.encode(sentence, OUTPUT)
 
-# Train / test split
-split_at = 500
+# Train / test split: 3/4 samples for training, 1/4 samples for test
+split_at = 3*DATASET_SIZE//4
 (x_train, x_val) = x[:split_at], x[split_at:]
 (y_train, y_val) = y[:split_at], y[split_at:]
 
@@ -89,7 +88,7 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accur
 model.summary()
 
 # Train the model each generation and show predictions against the validation dataset.
-for iteration in range(1, 1000):
+for iteration in range(1, 500):
     print()
     print('-' * 50)
     print('Iteration', iteration)
@@ -110,4 +109,4 @@ for iteration in range(1, 1000):
             print('OK!')
         else:
             print('')
-update("done")        
+input("done")        

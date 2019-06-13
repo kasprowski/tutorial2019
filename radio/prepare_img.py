@@ -1,5 +1,11 @@
 '''
+Deep Learning in the Eye Tracking World tutorial source file
+https://www.github.com/kasprowski/tutorial2019
+
 Prepares images from eye tracking data files
+
+for every file in /radio creates an image with saliency map 
+and stores it in /radio_img folder
 
 @author: pawel@kasprowski.pl
 '''
@@ -13,6 +19,8 @@ samplesIMG = []
 namesIMG = []
 i=0
 added = 0
+
+# loading files for  /radio
 for file in os.listdir(indir):
     sample = np.genfromtxt(os.path.join(indir, file), delimiter=',', skip_header=1)
     print("{}. {} - {}".format(i,file,sample.shape))
@@ -23,6 +31,7 @@ for file in os.listdir(indir):
     i+=1
 print("Added {} of {}".format(added,i))    
 
+# for each file creates an image with blurred gaze points 
 for j in range(len(samplesIMG)):
     print(namesIMG[j])
     img = np.zeros((108,192))

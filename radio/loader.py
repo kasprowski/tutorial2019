@@ -1,8 +1,23 @@
 '''
+Deep Learning in the Eye Tracking World tutorial source file
+https://www.github.com/kasprowski/tutorial2019
 
+Three methods that load "radio" data:
+load_csv(file):
+- loads a single CSV file
+load_img(indir):
+- loads all images from /indir
+load_files(indir,sequence_len=1000):
+- loads all csv files from /indir as samparate samples and pads them with zeros to make them equal length 
+
+Each method returns the triple:
+samples - input data
+labels - corresponding labels
+names - file names
 
 @author: pawel@kasprowski.pl
 '''
+
 import numpy as np
 import pandas
 import cv2

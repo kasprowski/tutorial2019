@@ -1,3 +1,12 @@
+'''
+Deep Learning in the Eye Tracking World tutorial source file
+https://www.github.com/kasprowski/tutorial2019
+
+Uses images from /eye_left to find gaze coordinates
+
+@author: pawel@kasprowski.pl
+'''
+
 import os
 import cv2
 import numpy as np
@@ -5,20 +14,11 @@ import numpy as np
 from sklearn.metrics.regression import mean_absolute_error
 from sklearn.model_selection import train_test_split
 from tensorflow.python.keras.callbacks import ModelCheckpoint
-from tensorflow.python.keras.layers import Activation, Dropout, Flatten, Dense, MaxPooling2D, BatchNormalization, Conv2D
+from tensorflow.python.keras.layers import Activation, Dropout, Flatten, Dense, MaxPooling2D, Conv2D
 from tensorflow.keras.models import Sequential
 
-def preprocess(image):
-    image = cv2.resize(image, (64, 64))
-    mask = np.zeros_like(image)
-    rows, cols,_ = mask.shape
-    mask=cv2.ellipse(mask, center=(rows//2, cols//2), axes=(28,14), 
-                     angle=0, startAngle=0, endAngle=360, 
-                     color=(255,255,255), thickness=-1)
-    result = np.bitwise_and(image,mask)
-    result = result[14:64-14,:]
-    return result
-
+# loads all images from /indir
+# label is derived from file name
 def load_images(indir):
     samples = []
     labels = []
@@ -34,6 +34,18 @@ def load_images(indir):
     samples = np.array(samples, dtype="float")
     labels = np.array(labels)
     return samples,labels
+
+# resizes each image to (64,64) and then masks the image with ellipse
+def preprocess(image):
+    image = cv2.resize(image, (64, 64))
+    mask = np.zeros_like(image)
+    rows, cols,_ = mask.shape
+    mask=cv2.ellipse(mask, center=(rows//2, cols//2), axes=(28,14), 
+                     angle=0, startAngle=0, endAngle=360, 
+                     color=(255,255,255), thickness=-1)
+    result = np.bitwise_and(image,mask)
+    result = result[14:64-14,:]
+    return result
 
 def build_cnn_model():
     model = Sequential()
@@ -103,3 +115,5 @@ print("Final MAE: {}".format(mean_absolute_error(testLabels,predictions)))
 
 model.save("final_model_{0:.2f}".format(mean_absolute_error(testLabels,predictions)))
 input("")
+
+

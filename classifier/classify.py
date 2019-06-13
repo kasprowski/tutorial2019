@@ -1,5 +1,9 @@
 '''
-Module using sklearn package to classify samples
+Deep Learning in the Eye Tracking World tutorial source file
+https://www.github.com/kasprowski/tutorial2019
+
+The module using sklearn package to classify samples
+
 @author: pawel@kasprowski.pl
 '''
 

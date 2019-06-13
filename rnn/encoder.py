@@ -1,9 +1,13 @@
 '''
-Taken from: 
+Deep Learning in the Eye Tracking World tutorial source file
+https://www.github.com/kasprowski/tutorial2019
+
+Class than encodes and decodes sequences of characters into on-hot encoded 2D arrays
+ 
+taken from: 
 https://github.com/keras-team/keras/blob/master/examples/addition_rnn.py
-
-
 '''
+
 import numpy as np
 
 class CharacterTable(object):

@@ -1,21 +1,23 @@
+'''
+Deep Learning in the Eye Tracking World tutorial source file
+https://www.github.com/kasprowski/tutorial2019
+
+Uses the previously created model to classify all samples from /eye_left
+Shows the results using test_model.jpg image
+
+@author: pawel@kasprowski.pl
+'''
+
+
 import os
 import cv2
 from sklearn.metrics.regression import mean_absolute_error
 from tensorflow.python.keras.models import load_model
 import numpy as np
 
-def preprocess(image):
-    image = cv2.resize(image, (64, 64))
-    mask = np.zeros_like(image)
-    rows, cols,_ = mask.shape
-    mask=cv2.ellipse(mask, center=(rows//2, cols//2), axes=(28,14), 
-                     angle=0, startAngle=0, endAngle=360, 
-                     color=(255,255,255), thickness=-1)
-    result = np.bitwise_and(image,mask)
-    result = result[14:64-14,:]
-    return result
 
-
+# loads all images from /indir
+# label is derived from file name
 def load_images(indir):
     samples = []
     labels = []
@@ -33,6 +35,19 @@ def load_images(indir):
     samples = np.array(samples, dtype="float")
     labels = np.array(labels)
     return samples,labels
+
+# resizes each image to (64,64) and then masks the image with ellipse
+def preprocess(image):
+    image = cv2.resize(image, (64, 64))
+    mask = np.zeros_like(image)
+    rows, cols,_ = mask.shape
+    mask=cv2.ellipse(mask, center=(rows//2, cols//2), axes=(28,14), 
+                     angle=0, startAngle=0, endAngle=360, 
+                     color=(255,255,255), thickness=-1)
+    result = np.bitwise_and(image,mask)
+    result = result[14:64-14,:]
+    return result
+
 
 
 

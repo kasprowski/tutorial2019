@@ -1,10 +1,11 @@
 '''
-Loads images and performs CNN classification
+Deep Learning in the Eye Tracking World tutorial source file
+https://www.github.com/kasprowski/tutorial2019
+
+Loads images using loader.py and performs CNN classification
 
 @author: pawel@kasprowski.pl
 '''
-import os
-import cv2
 import numpy as np
 import loader
 
@@ -23,23 +24,7 @@ from tensorflow.keras.layers import Flatten
 from tensorflow.keras.layers import MaxPooling2D
 from tensorflow.keras.models import Sequential
 
-
-# def load_img(indir):
-#     samples = []
-#     labels = []
-#     names = []
-#     for file in os.listdir(indir):
-#         sample = cv2.imread("{}/{}".format(indir,file))
-#         sample = cv2.cvtColor(sample, cv2.COLOR_BGR2GRAY)
-#         sample = cv2.resize(sample,(192,108))
-#         samples.append(sample)
-#         labels.append(file[:1])
-#         names.append(file[:-4])
-#     samples = np.array(samples)
-#     labels = np.array(labels)
-#     return samples,labels,names
-
-
+# creates and compiles the CNN model
 def cnn_model(inputShape,numClasses):
     model = Sequential()
     model.add(Conv2D(16, (3, 3), padding="same",input_shape=inputShape))

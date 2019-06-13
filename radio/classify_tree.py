@@ -1,13 +1,17 @@
 '''
-Classification of radio samples
+Deep Learning in the Eye Tracking World tutorial source file
+https://www.github.com/kasprowski/tutorial2019
+
+Classification of "radio" samples using DecisionTree
+Script loads data from /radio folder and classifies all samples as:
+L - layman
+R - resident
+S - radiology specialist  
 
 @author: pawel@kasprowski.pl
 '''
-import os
-import numpy as np
 import loader
 
-from keras_preprocessing.sequence import pad_sequences
 from sklearn.metrics import classification_report,confusion_matrix,accuracy_score, cohen_kappa_score
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing.label import LabelBinarizer

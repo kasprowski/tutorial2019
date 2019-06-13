@@ -1,5 +1,8 @@
 '''
-Application classifying datasetA_3c
+Deep Learning in the Eye Tracking World tutorial source file
+https://www.github.com/kasprowski/tutorial2019
+
+Application classifying datasetA_3c with three classes
 
 @author: pawel@kasprowski.pl
 '''
@@ -12,7 +15,6 @@ import numpy as np
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.models import Sequential
 from collections import Counter
-
 
 def main():
 
@@ -81,12 +83,10 @@ def main():
               )
     mlpResults = model.predict(testSamples)
 
-
     print(confusion_matrix(testLabels.argmax(axis=1), mlpResults.argmax(axis=1)))
     print(classification_report(testLabels.argmax(axis=1), mlpResults.argmax(axis=1),target_names=lb.classes_))
     print("MLP Accuracy: {:.2f}".format(accuracy_score(testLabels.argmax(axis=1), mlpResults.argmax(axis=1))))
     print("Cohen's Kappa {:.2f}".format(cohen_kappa_score(testLabels.argmax(axis=1), mlpResults.argmax(axis=1))))
-
 
     N = np.arange(0, EPOCHS)
     plt.style.use("ggplot")
@@ -111,8 +111,6 @@ def main():
 #    print(classification_report(testLabels.argmax(axis=1), treeResults.argmax(axis=1)))
 #    print("Tree Accuracy: {:.2f}".format(accuracy_score(testLabels.argmax(axis=1), treeResults.argmax(axis=1))))
 #    print("Cohen's Kappa {:.2f}".format(cohen_kappa_score(testLabels.argmax(axis=1), treeResults.argmax(axis=1))))
-
-
 
 if __name__ == "__main__":
     main()

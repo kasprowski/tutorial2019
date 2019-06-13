@@ -1,9 +1,13 @@
 '''
+Deep Learning in the Eye Tracking World tutorial source file
+https://www.github.com/kasprowski/tutorial2019
+
 Example of linear regression using gradient descent
 compared with the analytical method
 
 @author: pawel@kasprowski.pl
-based on:
+
+based on and using data from:
 https://towardsdatascience.com/linear-regression-using-gradient-descent-97a6c8700931
 '''
 
@@ -27,8 +31,6 @@ b = 1
 #a = 5
 #b = -9
 
-
-
 L = 0.0001  # The learning Rate (for 0.0004 - jumps over the solution)
 epochs = 10  # The number of iterations to perform gradient descent
 
@@ -36,7 +38,6 @@ n = float(len(X)) # Number of elements in X
 
 a_values = []
 b_values = []
-
 
 # Performing Gradient Descent 
 for i in range(epochs): 
@@ -57,10 +58,10 @@ for i in range(epochs):
     print ("New b: {:.3f} - L * {:.3f} = {:.3f}".format(b, D_b, nb))
     a = na
     b = nb
-    # Make new prediction
+    # Make a new prediction
     Y_pred = a*X + b
     color = (i/epochs,0,0)
-    plt.plot([min(X), max(X)], [min(Y_pred), max(Y_pred)], color=color, label=str(i))  # regression line
+    plt.plot([min(X), max(X)], [min(Y_pred), max(Y_pred)], color=color, label=str(i))  # current regression line
 
 print("=====================================")
 E1 = ((Y-(a*X+b))**2).mean()
@@ -77,11 +78,10 @@ Y_pred = ca*X + cb
 E2 = ((Y-Y_pred)**2).mean()
 print("Calculated coeficients: a={:.3f} b={:.3f}, error={:.5f}".format(ca,cb,E2))
 plt.plot([min(X), max(X)], [min(Y_pred), max(Y_pred)], color=(0,0,1), label="calc")  # calculated line
-
-
 plt.legend(loc='lower left')    
 plt.show()
 
+# history of A coefficient changes
 plt.plot(range(len(a_values)),a_values,label="A values")
 #plt.plot(range(len(b_values)),b_values,label="B values")
 plt.legend(loc='lower left')    

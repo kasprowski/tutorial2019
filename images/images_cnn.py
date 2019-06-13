@@ -1,4 +1,7 @@
 '''
+Deep Learning in the Eye Tracking World tutorial source file
+https://www.github.com/kasprowski/tutorial2019
+
 Classification of eye tracking data from /data folder into one of four categories
 1) Loading data
 2) Extracting sequences
@@ -19,9 +22,8 @@ from tensorflow.python.keras.layers.core import Activation, Flatten, Dropout, De
 from tensorflow.python.keras.models import Sequential
 from tensorflow.python.layers.normalization import BatchNormalization
 
-
-
-def load_files(indir,sequence_len=200):
+# loads data from /indir
+def load_files(indir):
     samples = []
     names = []
     labels = []
@@ -41,6 +43,7 @@ def load_files(indir,sequence_len=200):
     labels = np.array(labels)
     return samples,labels,names
 
+# extracts from samples chunks of sequence_dim length with lag = sequence_lag
 def make_sequences(samples, labels, sequence_dim = 100, sequence_lag = 1, sequence_attributes = 2):
     nsamples = []
     nlabels = []
@@ -61,7 +64,7 @@ def make_sequences(samples, labels, sequence_dim = 100, sequence_lag = 1, sequen
 
 def main():
     print("Loading samples and labels")
-    samples,labels,_ = load_files("data",sequence_len=200)
+    samples,labels,_ = load_files("data")
     print("Loaded {} samples".format(samples.shape[0]))
     
     sequence_dim = 100

@@ -1,4 +1,7 @@
 '''
+Deep Learning in the Eye Tracking World tutorial source file
+https://www.github.com/kasprowski/tutorial2019
+
 Test of classification models using four types of generated images
 
 @author: pawel@kasprowski.pl
@@ -8,31 +11,30 @@ import matplotlib.pyplot as plt
 import numpy as np
 import cv2
 from sklearn.preprocessing.label import LabelBinarizer
-from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
-from sklearn.metrics.classification import accuracy_score, cohen_kappa_score
+from sklearn.metrics.classification import accuracy_score
 from models import cnn_network, flat_network, tree
 
 length = 100 #size of images
 size = 100 #number of samplesIMG per class
 
+# creates a dataset with size*4 samples (images) of four classes - each with different type of dash
 def prepare_samples():
     samplesIMG = []
     labels = []
     for i in range(size):
         sample = np.zeros((length,length))
-        for j in range(100):
+        for _ in range(100):
             x = random.randrange(0,length)
             y = random.randrange(0,length)
             sample[x:x+6,y:y+1]=255
-        #samplesIMG.append(sample.flatten())
         samplesIMG.append(sample)
         labels.append(1)
         if i==0: cv2.imwrite("h.jpg",sample)
     
     for i in range(size):
         sample = np.zeros((length,length))
-        for j in range(100):
+        for _ in range(100):
             x = random.randrange(2,97)
             y = random.randrange(2,97)
             sample[x:x+1,y:y+6]=255
@@ -42,7 +44,7 @@ def prepare_samples():
 
     for i in range(size):
         sample = np.zeros((length,length))
-        for j in range(100):
+        for _ in range(100):
             x = random.randrange(2,98)
             y = random.randrange(2,98)
             sample[x,y]=255
@@ -56,7 +58,7 @@ def prepare_samples():
 
     for i in range(size):
         sample = np.zeros((length,length))
-        for j in range(100):
+        for _ in range(100):
             x = random.randrange(2,98)
             y = random.randrange(2,98)
             sample[x,y]=255

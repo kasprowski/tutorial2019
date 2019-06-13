@@ -1,10 +1,13 @@
 '''
+Deep Learning in the Eye Tracking World tutorial source file
+https://www.github.com/kasprowski/tutorial2019
+
 Tree methods that:
-build the model using trainSamples and trainlabels
-return labels predicted by the model for testSamples
+- build the model using trainSamples and trainlabels
+- return labels predicted by the model for testSamples
 
 tree() - DecisionTree
-flat_network() - classic Multi Layer Perceptrion
+flat_network() - classic Multilayer Perceptrion
 cnn_network() - example of Convolutional Neural Network
 
 @author: pawel@kasprowski.pl
@@ -22,9 +25,9 @@ from tensorflow.keras.models import Sequential
 
 def tree(trainSamples, trainLabels, testSamples):
     
+    # samples must be flat (i.e. one dimensional) for tree!
     length = trainSamples.shape[1]
     trainSamples = trainSamples.reshape(-1,length*length)
-
     testSamples = testSamples.reshape(-1,length*length)
     
     model = DecisionTreeClassifier()
@@ -33,11 +36,13 @@ def tree(trainSamples, trainLabels, testSamples):
     return testResults
 
 def flat_network(trainSamples, trainLabels, testSamples):
-    length = trainSamples.shape[1]
-    classes_number = trainLabels.shape[1]
 
+    # samples must be flat (i.e. one dimensional) for MLP!
+    length = trainSamples.shape[1]
     trainSamples = trainSamples.reshape(-1,length*length)
     testSamples = testSamples.reshape(-1,length*length)
+
+    classes_number = trainLabels.shape[1]
 
     model = Sequential()
     model.add(Flatten())
@@ -51,6 +56,8 @@ def flat_network(trainSamples, trainLabels, testSamples):
     return testResults
     
 def cnn_network(trainSamples, trainLabels, testSamples):
+    
+    # samples must 3D for CNN!
     trainSamples = np.expand_dims(trainSamples, axis=3)
     testSamples = np.expand_dims(testSamples, axis=3)
 
